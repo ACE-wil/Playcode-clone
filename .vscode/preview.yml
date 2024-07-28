@@ -1,0 +1,10 @@
+# .vscode/preview.yml
+autoOpen: false # 打开工作空间时是否自动开启所有应用的预览
+apps:
+  - port: 3000 # 应用的端口
+    run: nvm install 18.17.0 && npm install -g npm@10.5.0 && npm install && npm run dev # 应用的启动命令
+    root: ./ # 应用的启动目录
+    name: Nextjs # 应用名称
+    description: Next.js 为你提供最佳的开发者体验，具备你在生产中需要的所有功能：混合静态和服务器渲染，TypeScript 支持，智能打包，路由预获取等等。 # 应用描述
+    autoOpen: false # 打开工作空间时是否自动开启预览（优先级高于根级 autoOpen） 
+    autoPreview: false # 是否自动打开预览, 若无则默认为true
