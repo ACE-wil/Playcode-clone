@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import MonacoEditor from "react-monaco-editor";
+
 
 function ConsoleTester() {
     const [code, setCode] = useState('console.log("Hello, World!");');
