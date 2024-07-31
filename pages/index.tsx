@@ -6,8 +6,8 @@ import ConsoleTester from "./console/ConsoleTester";
 import TheEditor from "./console/TheEditor";
 const Home: NextPage = () => {
   return (
-    <div style={{marginTop:'200px'}}>
-      <TheEditor value={undefined} onChange={undefined}/>
+    <div style={{width:'100vw',height:'100vh'}}>
+      <ConsoleTester />
     </div>
   );
 };

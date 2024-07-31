@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import MonacoEditor from "react-monaco-editor";
-
+import TheEditor from './TheEditor';
 
 function ConsoleTester() {
     const [code, setCode] = useState('console.log("Hello, World!");');
     const [output, setOutput] = useState('');
-
-    const handleCodeChange = (event) => {
-        setCode(event.target.value);
-    };
 
     const runCode = () => {
         try {
@@ -38,7 +33,8 @@ function ConsoleTester() {
     const appendMessage = (message, isError) => {
         const p = document.createElement('p');
         p.textContent = message;
-        p.style.color = 'black'; // 设置错误信息的颜色
+        p.style.color =  '#000'; // 如果是错误，则显示红色
+        p.style.fontFamily = 'Menlo,Monaco,source-code-pro,Ubuntu Mono,DejaVu sans mono,Consolas,monospace'
         document.getElementById('console').appendChild(p);
         setOutput(document.getElementById('console').innerHTML);
     };
@@ -48,14 +44,13 @@ function ConsoleTester() {
     }, [code]); // 依赖于`code`的变化
 
     return (
-        <div>
-            <textarea
-                value={code}
-                onChange={handleCodeChange}
-                style={{ width: '100%', height: '50vh' }}
-            />
-            <button onClick={runCode}>Run Code</button>
-            <div id="console" style={{ height: '50vh', overflowY: 'scroll', backgroundColor: '#f4f4f4', padding: '10px' }} dangerouslySetInnerHTML={{ __html: output }} />
+        <div style={{display:'flex',flexDirection:'row'}}>
+            <TheEditor value={code} onChange={setCode} /> {/* 使用 TheEditor 替换 textarea */}
+            <div style={{display:'flex', flexDirection:'column'}}>
+                <div style={{marginTop:'1vh',padding:'20px',fontWeight:'bold',fontSize:'20px'}}>Console</div>
+                <div id="console" style={{ height: '100vh', overflowY: 'scroll', backgroundColor: '#fcc7d7;', padding: '20px', width:'50vw' }} dangerouslySetInnerHTML={{ __html: output }} />
+
+                </div>
         </div>
     );
 }

@@ -1,28 +1,29 @@
-// components/MonacoEditor.js
+// components/TheEditor.js
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-// 动态导入MonacoEditor，以确保其仅在客户端渲染
 const MonacoEditor = dynamic(() => import('@monaco-editor/react').then(mod => mod.default), { ssr: false });
 
 const TheEditor = ({ value, onChange }) => {
   const [language, setLanguage] = useState('javascript');
   const [theme, setTheme] = useState('vs-dark');
 
-  const handleEditorChange = (value) => {
-    onChange(value);
+  const handleEditorChange = (newValue) => {
+    onChange(newValue); // 将新值传递给父组件
   };
 
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
 
-const handleThemeChange = (event) => {
+  const handleThemeChange = (event) => {
     setTheme(event.target.value);
   };
+
   return (
-    <div>
-      <div>
+    <div style={{marginLeft:'4vw',marginBottom:'3vh'}}>
+      <div style={{display:'flex', flexDirection:'row',marginBottom:'1vh',marginTop:'1vh'}}>
+      <div style={{display:'flex', flexDirection:'column',width:'24vw',marginLeft:'1vw'}}>
         <label htmlFor="language-select">Language:</label>
         <select id="language-select" value={language} onChange={handleLanguageChange}>
           <option value="typescript">TypeScript</option>
@@ -30,32 +31,30 @@ const handleThemeChange = (event) => {
           <option value="html">HTML</option>
           <option value="css">CSS</option>
           <option value="json">JSON</option>
-          {/* 添加更多语言选项 */}
         </select>
       </div>
-      <div>
+      <div style={{display:'flex', flexDirection:'column',width:'24vw',marginLeft:'1vw'}}>
         <label htmlFor="theme-select">Theme:</label>
         <select id="theme-select" value={theme} onChange={handleThemeChange}>
           <option value="vs-dark">Dark</option>
           <option value="vs-light">Light</option>
           <option value="hc-black">High Contrast Black</option>
           <option value="hc-light-blue">High Contrast Light Blue</option>
-          {/* 添加更多主题选项 */}
         </select>
       </div>
-    <MonacoEditor
-      width="100%"
-      height={'50vh'}
-      language={language}
-          theme={theme}
-          value={value}
-          options={{
-            selectOnLineNumbers: true,
-            matchBrackets: "near",
-          }}
-      defaultValue={value}
-      onChange={handleEditorChange}
-    />
+      </div>
+      <MonacoEditor
+        width="50vw"
+        height={'100vh'}
+        language={language}
+        theme={theme}
+        value={value}
+        options={{
+          selectOnLineNumbers: true,
+          matchBrackets: "near",
+        }}
+        onChange={handleEditorChange}
+      />
     </div>
   );
 };
